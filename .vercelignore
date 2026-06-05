@@ -1,0 +1,12 @@
+# Ignore dotfiles and dot-directories (except .vercel)
+.*
+!/.vercelignore
+!/.gitignore
+!/.env.example
+
+# Ignore development files
+node_modules
+dist
+.git
+.vscode
+*.log
