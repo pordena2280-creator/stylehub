@@ -1,0 +1,130 @@
+/* ============================================================
+   CONTACT PAGE — primary #ff3d3d  secondary #004ec3  gray #333e48
+   All classes prefixed tf-contact-* to match Contact.tsx
+   ============================================================ */
+
+/* ===== ROOT ===== */
+.tf-contact-page { width: 100%; }
+
+/* ===== HERO ===== */
+.tf-contact-hero { background: #333e48; padding: 60px 0; text-align: center; }
+.tf-contact-hero h1 { font-size: 36px; font-weight: 800; color: #fff; margin: 0 0 12px; }
+.tf-contact-hero p  { font-size: 16px; color: #b0b5ba; margin: 0; }
+
+/* ===== MAIN CONTENT ===== */
+.tf-contact-content { padding: 60px 0; }
+
+/* Info card (left panel) */
+.tf-contact-info-section {
+  background: #fff; border: 1px solid #e1e1e1;
+  border-radius: 4px; padding: 32px;
+}
+.tf-contact-info-section h2 { font-size: 22px; font-weight: 700; color: #333e48; margin: 0 0 10px; }
+.tf-contact-intro { font-size: 14px; color: #505050; line-height: 1.7; margin: 0 0 28px; }
+
+/* Detail list — each info item */
+.tf-contact-info-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 15px 0; border-bottom: 1px solid #f5f5f5;
+}
+.tf-contact-info-item:last-child { border-bottom: none; }
+
+/* Icon circle */
+.tf-contact-info-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: rgba(255,61,61,0.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #ff3d3d;
+}
+
+/* Info text block */
+.tf-contact-info-content h4 {
+  font-size: 13px; font-weight: 700; color: #333e48;
+  margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tf-contact-info-content p {
+  font-size: 13px; color: #505050; margin: 0; line-height: 1.6;
+}
+.tf-contact-info-content a { color: #004ec3; text-decoration: none; }
+.tf-contact-info-content a:hover { color: #ff3d3d; }
+
+/* Social media block */
+.tf-contact-social-media { margin-top: 28px; padding-top: 22px; border-top: 1px solid #e1e1e1; }
+.tf-contact-social-media h4 {
+  font-size: 13px; font-weight: 700; color: #333e48;
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;
+}
+.tf-contact-social-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.tf-contact-social-link {
+  width: 38px; height: 38px;
+  background: #f5f5f5; border: 1px solid #e1e1e1;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #505050;
+  text-decoration: none; transition: all 0.2s;
+}
+.tf-contact-social-link:hover { background: #ff3d3d; color: #fff; border-color: #ff3d3d; }
+
+/* ===== CONTACT FORM CARD ===== */
+.tf-contact-form-section{
+  background: #fff; border: 1px solid #e1e1e1;
+  border-radius: 4px; padding: 32px;
+}
+.tf-contact-form-section h2 { font-size: 22px; font-weight: 700; color: #333e48; margin: 0 0 6px; }
+.tf-contact-form-intro { font-size: 14px; color: #909090; margin: 0 0 24px; }
+
+/* Form layout */
+.tf-contact-form { display: flex; flex-direction: column; gap: 18px; }
+.tf-contact-form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.tf-contact-form-group label {
+  font-size: 12px; font-weight: 700; color: #333e48;
+  text-transform: uppercase; letter-spacing: 0.4px;
+}
+.tf-contact-form-group input,
+.tf-contact-form-group textarea {
+  padding: 11px 14px;
+  border: 1.5px solid #e1e1e1;
+  border-radius: 4px;
+  font-size: 14px; color: #333e48;
+  outline: none; transition: border-color 0.2s;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+}
+.tf-contact-form-group input:focus,
+.tf-contact-form-group textarea:focus {
+  border-color: #ff3d3d;
+  box-shadow: 0 0 0 3px rgba(255,61,61,0.08);
+}
+.tf-contact-form-group input::placeholder,
+.tf-contact-form-group textarea::placeholder { color: #b0b5ba; }
+.tf-contact-form-group textarea { resize: vertical; min-height: 130px; }
+.tf-contact-form .btn { align-self: flex-start; }
+
+/* ===== MAP SECTION ===== */
+.tf-contact-map-section { padding: 0 0 60px; }
+.tf-contact-map-title { font-size: 22px; font-weight: 700; color: #333e48; margin: 0 0 20px; }
+.tf-contact-map-container {
+  border-radius: 4px; overflow: hidden;
+  border: 1px solid #e1e1e1;
+  height: 380px;
+}
+.tf-contact-map-container iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* ===== FAQ LINKS CTA ===== */
+.tf-contact-faq-links-section { padding: 60px 0; text-align: center; background: #f5f5f5; }
+.tf-contact-faq-links-section h2 { font-size: 26px; font-weight: 800; color: #333e48; margin: 0 0 10px; }
+.tf-contact-faq-links-section p  { font-size: 15px; color: #909090; margin: 0 0 24px; }
+.tf-contact-faq-buttons { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .tf-contact-content .row { gap: 0; }
+}
+@media (max-width: 768px) {
+  .tf-contact-hero h1 { font-size: 26px; }
+  .tf-contact-info-section,
+  .tf-contact-form-section { padding: 24px; }
+  .tf-contact-map-container { height: 260px; }
+}

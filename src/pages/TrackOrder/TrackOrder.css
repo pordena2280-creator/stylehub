@@ -1,0 +1,476 @@
+/* ============================================================
+   TRACK ORDER PAGE — TechStore
+   tf-trackorder-* prefix for all classes
+   ============================================================ */
+
+/* ===== PAGE WRAPPER ===== */
+.tf-trackorder-page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ===== BREADCRUMB ===== */
+.tf-trackorder-section {
+  width: 100%;
+}
+
+.tf-trackorder-breadcrumb {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.tf-trackorder-breakcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.tf-trackorder-breakcrumbs a {
+  color: var(--secondary);
+  display: inline;
+}
+
+.tf-trackorder-breakcrumbs a:hover {
+  color: var(--primary);
+}
+
+.tf-trackorder-breakcrumb-divider {
+  display: flex;
+  align-items: center;
+  color: var(--text);
+  font-size: 10px;
+}
+
+/* ===== HERO / HEADER ===== */
+.tf-trackorder-hero {
+  background: var(--bg-6);
+  padding: 40px 0 32px;
+  text-align: center;
+}
+
+.tf-trackorder-hero-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: -0.3px;
+}
+
+/* ===== FORM SECTION ===== */
+.tf-trackorder-form-section {
+  padding: 60px 0;
+  background: var(--white);
+}
+
+.tf-trackorder-form-card {
+  max-width: 100%;
+}
+
+.tf-trackorder-form-header h5 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+
+.tf-trackorder-form-header .body-text-3 {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 600px;
+}
+
+.tf-trackorder-form-form .tf-trackorder-form-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.tf-trackorder-form-form .tf-trackorder-form-row .form-group {
+  flex: 1;
+  min-width: 240px;
+}
+
+.tf-trackorder-form-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.tf-trackorder-form-btn-wrap {
+  flex-shrink: 0;
+  min-width: 140px;
+}
+
+.tf-trackorder-form-btn-wrap .btn {
+  padding: 11px 28px;
+  font-size: 14px;
+}
+
+/* ===== RESULT SECTION ===== */
+.tf-trackorder-result-section {
+  padding: 0 0 60px;
+  background: var(--white);
+}
+
+/* ----- result card ----- */
+.tf-trackorder-result-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+
+.tf-trackorder-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tf-trackorder-result-header h5 {
+  font-size: 18px;
+  color: var(--text-3);
+}
+
+.tf-trackorder-result-meta {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.tf-trackorder-status-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0, 78, 195, 0.08);
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ----- timeline ----- */
+.tf-trackorder-timeline {
+  display: flex;
+  position: relative;
+  padding: 0 0 8px;
+  margin-bottom: 28px;
+}
+
+.tf-trackorder-timeline-line {
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  background: var(--gray-4);
+}
+
+.tf-trackorder-timeline-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.tf-trackorder-timeline-point {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--gray-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--white);
+  transition: all 0.3s ease;
+}
+
+.tf-trackorder-timeline-item.done .tf-trackorder-timeline-point {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.tf-trackorder-timeline-item.active .tf-trackorder-timeline-point {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px rgba(0, 78, 195, 0.15);
+}
+
+.tf-trackorder-timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: block;
+}
+
+.tf-trackorder-timeline-item.done .tf-trackorder-timeline-dot {
+  background: var(--white);
+}
+
+.tf-trackorder-timeline-item:not(.done) .tf-trackorder-timeline-dot {
+  background: var(--gray-4);
+}
+
+.tf-trackorder-timeline-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--gray-2);
+}
+
+.tf-trackorder-timeline-item.done .tf-trackorder-timeline-content,
+.tf-trackorder-timeline-item.active .tf-trackorder-timeline-content {
+  color: var(--text-3);
+}
+
+.tf-trackorder-result-desc {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ----- detail summary card ----- */
+.tf-trackorder-detail-card {
+  background: var(--bg-2);
+  border-radius: 6px;
+  padding: 18px 24px;
+}
+
+.tf-trackorder-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tf-trackorder-detail-row h6 {
+  font-size: 15px;
+  color: var(--text-3);
+}
+
+.tf-trackorder-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ===== RECENT ORDERS SECTION ===== */
+.tf-trackorder-recent-section {
+  padding: 0 0 80px;
+  background: var(--white);
+}
+
+.tf-trackorder-recent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.tf-trackorder-recent-header h5 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.tf-trackorder-recent-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.tf-trackorder-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tf-trackorder-nav-btn:hover {
+  background: var(--gray);
+  color: var(--white);
+  border-color: var(--gray);
+}
+
+/* grid */
+.tf-trackorder-recent-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+/* card */
+.tf-trackorder-recent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tf-trackorder-card-img {
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-6);
+}
+
+.tf-trackorder-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.tf-trackorder-recent-card:hover .tf-trackorder-card-img img {
+  transform: scale(1.05);
+}
+
+.tf-trackorder-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tf-trackorder-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  text-decoration: none;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tf-trackorder-card-name:hover {
+  color: var(--primary);
+}
+
+.tf-trackorder-card-info p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.tf-trackorder-card-info .font-2 {
+  font-size: 12px;
+  color: var(--gray-2);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ===== SPINNER ===== */
+.tf-trackorder-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: tf-trackorder-spin 0.7s linear infinite;
+}
+
+@keyframes tf-trackorder-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 991px) {
+  .tf-trackorder-recent-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tf-trackorder-form-form .tf-trackorder-form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tf-trackorder-form-form .tf-trackorder-form-row .form-group {
+    min-width: 100%;
+  }
+
+  .tf-trackorder-form-btn-wrap {
+    min-width: 100%;
+  }
+
+  .tf-trackorder-result-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tf-trackorder-timeline {
+    flex-wrap: wrap;
+    gap: 20px 0;
+  }
+
+  .tf-trackorder-timeline-item {
+    flex: 0 0 33%;
+  }
+
+  .tf-trackorder-timeline-line {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .tf-trackorder-hero-title {
+    font-size: 24px;
+  }
+
+  .tf-trackorder-hero {
+    padding: 28px 0 24px;
+  }
+
+  .tf-trackorder-form-section {
+    padding: 40px 0;
+  }
+
+  .tf-trackorder-result-card {
+    padding: 20px 16px;
+  }
+
+  .tf-trackorder-recent-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .tf-trackorder-recent-header h5 {
+    font-size: 16px;
+  }
+
+  .tf-trackorder-timeline-item {
+    flex: 0 0 50%;
+  }
+}

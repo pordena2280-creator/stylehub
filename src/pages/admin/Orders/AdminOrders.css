@@ -1,0 +1,130 @@
+.orders-summary {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.summary-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.summary-chip.pending { background: #fef9c3; color: #ca8a04; }
+.summary-chip.processing { background: #dbeafe; color: #2563eb; }
+.summary-chip.shipping { background: #ede9fe; color: #7c3aed; }
+
+.order-id {
+  color: #0ea5e9;
+  font-family: monospace;
+}
+
+.customer-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.customer-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.customer-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.customer-email {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.payment-badge {
+  background: #f1f5f9;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.status-pending { background: #fef9c3; color: #ca8a04; }
+.status-processing { background: #dbeafe; color: #2563eb; }
+.status-shipping { background: #ede9fe; color: #7c3aed; }
+.status-delivered { background: #dcfce7; color: #16a34a; }
+.status-cancelled { background: #fee2e2; color: #dc2626; }
+
+/* Order Modal */
+.order-modal { max-width: 560px; }
+
+.order-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.detail-section h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+  margin: 0 0 10px;
+}
+
+.detail-section p {
+  font-size: 14px;
+  color: #374151;
+  margin: 4px 0;
+}
+
+.status-update-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 14px;
+}
+
+.status-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.status-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s;
+}
+
+.status-option input { display: none; }
+
+.status-option.selected {
+  border-color: #0ea5e9;
+  background: #f0f9ff;
+  color: #0ea5e9;
+}
+
+.status-option:hover {
+  border-color: #0ea5e9;
+}

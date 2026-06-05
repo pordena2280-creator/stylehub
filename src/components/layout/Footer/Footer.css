@@ -1,0 +1,348 @@
+/* ============================================
+   FOOTER — TechStore
+   ============================================ */
+
+.site-footer {
+  background: #1a1f2e;   /* oscuro similar al original */
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.footer-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== BENEFITS BAR ===== */
+.footer-benefits {
+  background: #252b38;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 28px 0;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.benefit-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(255,61,61,0.1);
+  border: 1px solid rgba(255,61,61,0.2);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff3d3d;
+  flex-shrink: 0;
+}
+
+.benefit-item h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 3px;
+}
+
+.benefit-item p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ===== MAIN FOOTER ===== */
+.footer-main {
+  padding: 60px 0 40px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 48px;
+}
+
+.footer-col-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #0ea5e9;
+  display: inline-block;
+}
+
+/* Brand */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.footer-logo-mark {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  color: #f1f5f9;
+  letter-spacing: -0.5px;
+}
+
+.footer-desc {
+  color: #64748b;
+  line-height: 1.7;
+  margin: 0 0 20px;
+  font-size: 13px;
+}
+
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.footer-contact-list li svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #38bdf8;
+}
+
+.footer-contact-list a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-contact-list a:hover { color: #38bdf8; }
+
+/* Links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links li a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s, padding-left 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-links li a::before {
+  content: '›';
+  color: #0ea5e9;
+  font-size: 16px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.footer-links li a:hover {
+  color: #e2e8f0;
+  padding-left: 6px;
+}
+
+.footer-links li a:hover::before {
+  opacity: 1;
+}
+
+/* Newsletter */
+.footer-newsletter-desc {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.newsletter-form {
+  display: flex;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+}
+
+.newsletter-form:focus-within {
+  border-color: #0ea5e9;
+}
+
+.newsletter-form input {
+  flex: 1;
+  background: #1e293b;
+  border: none;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #e2e8f0;
+  outline: none;
+  min-width: 0;
+}
+
+.newsletter-form input::placeholder { color: #475569; }
+
+.newsletter-form button {
+  background: #0ea5e9;
+  border: none;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover { background: #0284c7; }
+
+.newsletter-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4ade80;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 0;
+  margin-bottom: 20px;
+}
+
+/* Social */
+.footer-social {
+  display: flex;
+  gap: 10px;
+}
+
+.social-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: #1e293b;
+  color: #64748b;
+  border: 1px solid #334155;
+}
+
+.social-link:hover { transform: translateY(-3px); }
+.social-link.facebook:hover { background: #1877f2; color: #fff; border-color: #1877f2; }
+.social-link.twitter:hover { background: #1da1f2; color: #fff; border-color: #1da1f2; }
+.social-link.instagram:hover { background: #e1306c; color: #fff; border-color: #e1306c; }
+.social-link.youtube:hover { background: #ff0000; color: #fff; border-color: #ff0000; }
+
+/* ===== FOOTER BOTTOM ===== */
+.footer-bottom {
+  border-top: 1px solid #1e293b;
+  padding: 20px 0;
+  background: #020617;
+}
+
+.footer-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copyright {
+  color: #475569;
+  font-size: 13px;
+  margin: 0;
+}
+
+.footer-payment-methods {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.payment-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-icon-img {
+  height: 32px;
+  width: auto;
+  max-width: 52px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .footer-main {
+    padding: 40px 0 32px;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefit-item {
+    gap: 12px;
+  }
+}

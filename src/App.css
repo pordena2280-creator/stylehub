@@ -1,0 +1,24 @@
+/* App.css — solo overrides mínimos, el global.css maneja todo */
+
+/* Asegurar que el root ocupe el 100% */
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+/* Quitar el display:flex del body que pone Vite por defecto */
+body {
+  display: block !important;
+  place-items: unset !important;
+}
+
+/* Loading state for lazy loaded admin pages */
+.admin-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  font-size: 1.1rem;
+  color: #64748b;
+}

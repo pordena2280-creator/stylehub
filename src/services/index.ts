@@ -1,0 +1,28 @@
+// Barrel de servicios — re-exporta automáticamente todos los servicios existentes
+export { supabase } from './supabase';
+export * from './authService';
+export { isStaffRole } from './authService';
+export * from './cmsService';
+export * from './staffInviteService';
+export * from './productService';
+export * from './categoryService';
+export * from './orderService';
+export * from './cartService';
+export * from './wishlistService';
+export * from './reviewService';
+export * from './blogService';
+export * from './bannerService';
+export * from './storageService';
+export * from './addressService';
+export * from './stripeService';
+export * from './roleService';
+export * from './profilesService';
+export * from './couponService';
+export * from './settingsService';
+export * from './loyaltyService';
+export * from './notificationService';
+export * from './reportsService';
+export * from './variantService';
+export * from './affiliateService';
+export * from './invoiceService';
+export type { Banner, BlogPost, Order, User } from '../types';

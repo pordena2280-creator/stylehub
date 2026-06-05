@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Rutas privadas — no indexar
+Disallow: /admin/
+Disallow: /checkout
+Disallow: /profile
+Disallow: /orders
+Disallow: /completar-perfil
+Disallow: /reset-password
+
+# Sitemap
+Sitemap: https://techstore.vercel.app/sitemap.xml
