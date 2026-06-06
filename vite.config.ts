@@ -35,22 +35,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react-router') || id.includes('react') || id.includes('react-dom')) {
-              return 'react-vendor';
-            }
-            if (id.includes('@stripe') || id.includes('stripe')) {
-              return 'stripe';
-            }
-            if (id.includes('@supabase')) {
-              return 'supabase';
-            }
-            if (id.includes('@heroicons') || id.includes('lucide-react') || id.includes('fontawesome')) {
-              return 'icons';
-            }
-            return 'vendor';
-          }
-          return undefined;
+          if (!id.includes('node_modules')) return undefined;
+          if (id.includes('react-router') || id.includes('@tanstack/react-query')) return 'react-vendor';
+          if (id.includes('react-dom') || id.includes('react-dom/')) return 'react-dom';
+          if (id.includes('react/') || id.includes('react/jsx-runtime')) return 'react';
+          if (id.includes('@stripe') || id.includes('stripe')) return 'stripe';
+          if (id.includes('@supabase') || id.includes('@supabase')) return 'supabase';
+          return 'vendor';
         },
       },
     },
