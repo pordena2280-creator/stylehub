@@ -50,7 +50,7 @@ const Categories = () => {
     <div className="categories-page">
       <Seo
         title="Categorías"
-        description="Explora todas las categorías de TechStore. Encuentra productos por tipo, desde smartphones hasta gaming."
+        description="Explora todas las categorías de StyleHub. Encuentra productos por tipo, desde smartphones hasta audio."
         canonicalUrl="/categories"
         breadcrumbs={[
           { name: 'Inicio', url: '/' },

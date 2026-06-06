@@ -31,7 +31,7 @@ const About = () => {
     <div className="about-page">
       <Seo
         title="Acerca de Nosotros"
-        description="Conoce a TechStore — tu tienda de tecnología de confianza desde 2020. Misión, valores y equipo."
+        description="Conoce a StyleHub — tu tienda de tecnología de confianza desde 2020. Misión, valores y equipo."
         canonicalUrl="/about"
       />
 
@@ -68,7 +68,7 @@ const About = () => {
               </div>
             </div>
             <div className="about-hero-img">
-              <img src={cms?.image_url || '/images/banner/banner-3.jpg'} alt="Acerca de TechStore" />
+              <img src={cms?.image_url || '/images/banner/banner-3.jpg'} alt="Acerca de StyleHub" />
             </div>
           </div>
         </div>

@@ -110,7 +110,7 @@ const ProductDetail = () => {
     <div className="product-detail-page">
       <Seo
         title={product.name}
-        description={product.description || `${product.name} — disponible en TechStore. ${product.stock > 0 ? 'En stock.' : 'Agotado.'}`}
+        description={product.description || `${product.name} — disponible en StyleHub. ${product.stock > 0 ? 'En stock.' : 'Agotado.'}`}
         imageUrl={images[0]}
         canonicalUrl={`/product/${product.id}`}
         ogType="product"

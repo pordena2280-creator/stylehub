@@ -43,7 +43,7 @@ const Home = () => {
   return (
     <>
       <Seo
-        title={heroCms?.title ? `${heroCms.title} | TechStore` : 'TechStore — E-Commerce Profesional'}
+        title={heroCms?.title ? `${heroCms.title} | StyleHub` : 'StyleHub — E-Commerce Profesional'}
         description={heroCms?.description || 'Descubre los mejores productos con envío gratis y garantía extendida.'}
         imageUrl={heroImage}
       />

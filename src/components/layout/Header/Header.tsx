@@ -30,8 +30,8 @@ const Header = () => {
   const topbarPhone = topbarCms?.title || '+1 (800) 123-4567';
   const topbarEmail = topbarCms?.subtitle || 'soporte@tienda.com';
   const topbarPromo = topbarCms?.description || 'Envío gratis en pedidos mayores a $100';
-  const brandName = brandCms?.title || 'TechStore';
-  const brandTagline = brandCms?.subtitle || 'Tu tienda de tecnología de confianza';
+  const brandName = brandCms?.title || 'StyleHub';
+  const brandTagline = brandCms?.subtitle || 'Tu tienda de confianza';
 
   const { items } = useCart();
   const { isAuthenticated } = useAuth();

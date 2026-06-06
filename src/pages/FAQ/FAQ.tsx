@@ -58,7 +58,7 @@ const FAQ = () => {
     <div className="faq-page">
       <Seo
         title="Preguntas Frecuentes"
-        description="Respuestas sobre envíos, devoluciones, pagos, productos y tu cuenta en TechStore."
+        description="Respuestas sobre envíos, devoluciones, pagos, productos y tu cuenta en StyleHub."
         canonicalUrl="/faq"
       />
 

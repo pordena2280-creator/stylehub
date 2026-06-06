@@ -109,7 +109,7 @@ const Register = () => {
             <div className="image-overlay">
               <div className="auth-brand">
                 <i className="fa-solid fa-store"></i>
-                <span>TechStore</span>
+                <span>StyleHub</span>
               </div>
               <h2>¡Únete a Nosotros!</h2>
               <p>Crea tu cuenta y descubre un mundo de productos increíbles</p>

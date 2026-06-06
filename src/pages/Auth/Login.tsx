@@ -68,7 +68,7 @@ const Login = () => {
             <div className="image-overlay">
               <div className="auth-brand">
                 <i className="fa-solid fa-store"></i>
-                <span>TechStore</span>
+                <span>StyleHub</span>
               </div>
               <h2>¡Bienvenido de nuevo!</h2>
               <p>Inicia sesión para acceder a tu cuenta y disfrutar de todos nuestros beneficios</p>

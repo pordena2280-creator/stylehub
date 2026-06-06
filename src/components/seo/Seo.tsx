@@ -34,7 +34,7 @@ export type SeoProps = {
   breadcrumbs?: SeoBreadcrumb[];
 };
 
-const APP_URL = import.meta.env.VITE_APP_URL || 'https://techstore.vercel.app';
+    const APP_URL = import.meta.env.VITE_APP_URL || 'https://stylehub-2.vercel.app';
 
 // Helpers para manipular el <head> sin dependencias externas
 const setMeta = (selector: string, attr: string, value: string) => {
@@ -85,7 +85,7 @@ export default function Seo({
   breadcrumbs,
 }: SeoProps) {
   useEffect(() => {
-    const siteTitle = 'TechStore';
+    const siteTitle = 'StyleHub';
     const fullTitle = title ? `${title} | ${siteTitle}` : `${siteTitle} — E-Commerce Profesional`;
     const canonical = canonicalUrl || window.location.href;
     const image = imageUrl || `${APP_URL}/images/og-default.jpg`;

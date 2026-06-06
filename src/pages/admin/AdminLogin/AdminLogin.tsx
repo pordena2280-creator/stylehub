@@ -80,7 +80,7 @@ const AdminLogin = () => {
           <div className="admin-login-logo">
             <i className="fa-solid fa-shield-halved" />
           </div>
-          <h1>Panel TechStore</h1>
+          <h1>Panel StyleHub</h1>
           <p>Acceso para administradores y equipo autorizado</p>
         </div>
 

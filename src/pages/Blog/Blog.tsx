@@ -87,7 +87,7 @@ const Blog = () => {
                         <div className="blog-meta">
                           <span className="author">
                             <i className="fa-solid fa-user" />
-                            {(post.author as { full_name?: string })?.full_name || 'Equipo TechStore'}
+                            {(post.author as { full_name?: string })?.full_name || 'Equipo StyleHub'}
                           </span>
                           <span className="date">
                             <i className="fa-regular fa-calendar" />
