@@ -94,7 +94,7 @@ export const orderService = {
   async getAllOrders(page = 1, limit = 20, status?: OrderStatus): Promise<PaginatedResponse<Order>> {
     let query = supabase
       .from('orders')
-      .select('*, user:profiles(full_name, phone, role)', { count: 'exact' })
+      .select('*, user:profiles(full_name, phone, role), items:order_items(*, product:products(*))', { count: 'exact' })
       .order('created_at', { ascending: false });
 
     if (status) query = query.eq('status', status);

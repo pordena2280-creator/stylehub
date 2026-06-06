@@ -122,6 +122,21 @@ const Footer = () => {
               </ul>
             </div>
 
+            {/* Categorías Column */}
+            <div className="footer-col">
+              <h3 className="footer-col-title">Categorías</h3>
+              <ul className="footer-links">
+                <li><Link to="/products?category=accesorios">Accesorios</Link></li>
+                <li><Link to="/products?category=audio">Audio</Link></li>
+                <li><Link to="/products?category=camaras">Cámaras</Link></li>
+                <li><Link to="/products?category=laptops">Laptops</Link></li>
+                <li><Link to="/products?category=monitores">Monitores</Link></li>
+                <li><Link to="/products?category=smartphones">Smartphones</Link></li>
+                <li><Link to="/products?category=tablets">Tablets</Link></li>
+                <li><Link to="/products?category=wearables">Wearables</Link></li>
+              </ul>
+            </div>
+
             {/* Account Column */}
             <div className="footer-col">
               <h3 className="footer-col-title">Mi Cuenta</h3>
