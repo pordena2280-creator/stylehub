@@ -181,15 +181,13 @@ const Header = () => {
               {cartCount > 0 && <span className="action-badge cart-badge">{cartCount}</span>}
             </Link>
 
-            {/* Hamburger */}
+            {/* Hamburger — icono de lista para evitar confusiones con el logo */}
             <button
               className={`hamburger ${mobileOpen ? 'open' : ''}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Menú"
             >
-              <span></span>
-              <span></span>
-              <span></span>
+              <i className="fa-solid fa-bars"></i>
             </button>
           </div>
         </div>
