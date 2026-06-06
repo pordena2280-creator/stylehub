@@ -20,8 +20,8 @@ const AdminProducts = () => {
   const [saving, setSaving]     = useState(false);
   const [error, setError]       = useState<string | null>(null);
 
-  // Lista de URLs de imágenes (puede estar vacía)
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  // Lista de URLs de imágenes (arranca con 4 ranuras para galería)
+  const [imageUrls, setImageUrls] = useState<string[]>(Array.from({ length: 4 }, () => ''));
 
   const [formData, setFormData] = useState({
     name: '', description: '', price: 0, old_price: 0, sku: '',
@@ -68,7 +68,7 @@ const AdminProducts = () => {
   const openCreate = () => {
     setEditingProduct(null);
     setFormData({ name: '', description: '', price: 0, old_price: 0, sku: '', stock: 0, status: 'activo', rating: 0, reviews_count: 0, featured: false, category_id: null });
-    setImageUrls([]);
+    setImageUrls(Array.from({ length: 4 }, () => ''));
     setShowModal(true);
   };
 
@@ -82,8 +82,8 @@ const AdminProducts = () => {
       rating: product.rating || 0, reviews_count: product.reviews_count || 0,
       featured: product.featured || false, category_id: product.category_id || null,
     });
-     // Las imágenes vienen como array de strings, posiblemente vacío
-     setImageUrls((product.images || []).map(getImageUrlFromPath));
+     const existing = (product.images || []).map(getImageUrlFromPath);
+     setImageUrls([...existing, ...Array.from({ length: Math.max(4 - existing.length, 0) }, () => '')]);
     setShowModal(true);
   };
 
@@ -312,17 +312,13 @@ const AdminProducts = () => {
                         maxSizeMB={8}
                       />
                     ))}
-                    {/* Botón para agregar una nueva imagen */}
-                    <div className="add-image-slot">
-                      <ImageUploader
-                        currentUrl={null}
-                        bucket="product-images"
-                        folder="products"
-                        label="Agregar otra imagen"
-                        onUpload={(uploadedUrl) => handleImageUploadedAt(imageUrls.length, uploadedUrl)}
-                        maxSizeMB={8}
-                      />
-                    </div>
+                    <button
+                      type="button"
+                      className="btn-secondary add-more-images-btn"
+                      onClick={() => setImageUrls(prev => [...prev, ''])}
+                    >
+                      <i className="fa-solid fa-plus" /> Agregar otra imagen
+                    </button>
                   </div>
                   {imageUrls.length > 0 && (
                     <p className="img-url-hint">

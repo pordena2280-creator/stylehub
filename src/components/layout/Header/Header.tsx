@@ -51,6 +51,31 @@ const Header = () => {
   }, [location.pathname]);
 
   useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileOpen(false);
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      const nav = document.querySelector('.site-navbar');
+      const button = document.querySelector('.hamburger');
+      if (nav && !nav.contains(target) && !button?.contains(target)) {
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
     if (searchOpen) searchRef.current?.focus();
   }, [searchOpen]);
 
@@ -186,6 +211,8 @@ const Header = () => {
               className={`hamburger ${mobileOpen ? 'open' : ''}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Menú"
+              aria-expanded={mobileOpen}
+              aria-controls="site-main-nav"
             >
               <span></span>
               <span></span>
@@ -213,8 +240,18 @@ const Header = () => {
         )}
       </header>
 
+      <div
+        className={`mobile-nav-overlay ${mobileOpen ? 'visible' : ''}`}
+        onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
+      />
+
       {/* ===== NAVBAR ===== */}
-      <nav className={`site-navbar ${mobileOpen ? 'mobile-open' : ''}`}>
+      <nav
+        id="site-main-nav"
+        className={`site-navbar ${mobileOpen ? 'mobile-open' : ''}`}
+        aria-label="Navegación principal"
+      >
         <div className="navbar-container">
           <ul className="nav-list">
             {navLinks.map(link => (

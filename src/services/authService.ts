@@ -45,7 +45,13 @@ export const authService = {
         queryParams: { access_type: 'offline', prompt: 'consent' },
       },
     });
-    if (error) throw error;
+    if (error) {
+      const message = error.message || 'Error al iniciar sesión con Google';
+      if (/unsupported provider|provider is not enabled/i.test(message)) {
+        throw new Error('Google no está habilitado en Supabase. Activa el proveedor Google en Authentication > Providers y guarda los cambios.');
+      }
+      throw new Error(message);
+    }
     return data;
   },
 

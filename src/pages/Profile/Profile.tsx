@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
-import { useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMemo, useRef, useState } from 'react';
 import './Profile.css';
 import { useAuth } from '../../contexts';
 import { useOrders } from '../../hooks/useOrders';
+import { storageService } from '../../services/storageService';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { user, logout, updateProfile } = useAuth();
   const [activeTab, setActiveTab] = useState('profile');
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
 
    const [formData, setFormData] = useState({
      firstName: user?.full_name?.split(' ')[0] || '',
@@ -57,6 +62,39 @@ const Profile = () => {
     // Aquí iría la lógica para actualizar el perfil
     // Por ahora solo simulamos éxito
     alert('Perfil actualizado correctamente');
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login', { replace: true });
+  };
+
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user?.id) return;
+
+    try {
+      setAvatarError(null);
+      setAvatarUploading(true);
+
+      if (!file.type.startsWith('image/')) {
+        setAvatarError('Solo puedes subir imágenes.');
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        setAvatarError('La foto no puede superar 5 MB.');
+        return;
+      }
+
+      const avatarUrl = await storageService.uploadAvatar(file, user.id);
+      await updateProfile({ avatar_url: avatarUrl });
+    } catch (err) {
+      setAvatarError(err instanceof Error ? err.message : 'No se pudo subir la foto.');
+    } finally {
+      setAvatarUploading(false);
+      if (e.target) e.target.value = '';
+    }
   };
 
   const handlePasswordChange = (e: React.FormEvent) => {
@@ -119,15 +157,28 @@ case 'en_tránsito':
             <aside className="profile-sidebar">
               <div className="user-info">
                 <div className="user-avatar">
-                  <img src="/images/avatar/user.jpg" alt="Usuario" />
-                  <button className="btn-edit-avatar">
+                  <img
+                    src={user?.avatar_url || '/images/avatar/user.jpg'}
+                    alt="Usuario"
+                    onError={e => { e.currentTarget.src = '/images/avatar/user.jpg'; }}
+                  />
+                  <button className="btn-edit-avatar" type="button" onClick={() => fileInputRef.current?.click()}>
                     <i className="fa-solid fa-camera"></i>
                   </button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    onChange={handleAvatarChange}
+                  />
                 </div>
                  <h3>
                    {user?.full_name}
                  </h3>
                 <p>{user?.email}</p>
+                {avatarUploading && <p className="text-muted">Subiendo foto…</p>}
+                {avatarError && <p className="text-danger">{avatarError}</p>}
               </div>
 
               <nav className="profile-nav">
@@ -163,7 +214,7 @@ case 'en_tránsito':
                   <i className="fa-solid fa-heart"></i>
                   <span>Lista de Deseos</span>
                 </Link>
-                <button className="nav-item logout">
+                <button className="nav-item logout" onClick={handleLogout} type="button">
                   <i className="fa-solid fa-arrow-right-from-bracket"></i>
                   <span>Cerrar Sesión</span>
                 </button>

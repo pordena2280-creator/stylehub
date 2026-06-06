@@ -20,6 +20,7 @@ import { orderService } from '../../services/orderService';
 import { getProductImageUrl } from '../../utils/imageUtils';
 import Seo from '../../components/seo/Seo';
 import type { OrderItem } from '../../types';
+import { checkoutSchema } from '../../validators';
 import './Checkout.css';
 
 // ============================================================
@@ -84,6 +85,7 @@ const CheckoutForm = () => {
   const [couponCode, setCouponCode]     = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
   const [couponMsg, setCouponMsg]       = useState<{ ok: boolean; text: string } | null>(null);
+  const [acceptTerms, setAcceptTerms]   = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: user?.full_name?.split(' ')[0] || '',
@@ -103,8 +105,15 @@ const CheckoutForm = () => {
     if (stripe && elements) setStripeReady(true);
   }, [stripe, elements]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const sanitizeText = (value: string) => value.replace(/[<>]/g, '').trim();
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : sanitizeText(e.target.value);
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: value,
+    }));
+  };
 
   // Detectar cuando Stripe Elements está listo
   // useStripe() y useElements() devuelven null hasta que el SDK carga
@@ -135,16 +144,47 @@ const CheckoutForm = () => {
     if (items.length === 0){ setError('Tu carrito está vacío.'); return; }
     if (!stripe || !elements){ setError('Stripe aún no está listo. Recarga la página.'); return; }
 
-    const required = ['firstName','lastName','email','address','city','state','zipCode'];
-    if (required.some(k => !formData[k as keyof typeof formData])) {
-      setError('Por favor completa todos los campos marcados con *.');
+    const sanitizedForm = {
+      ...formData,
+      firstName: sanitizeText(formData.firstName),
+      lastName: sanitizeText(formData.lastName),
+      email: sanitizeText(formData.email).toLowerCase(),
+      phone: sanitizeText(formData.phone),
+      address: sanitizeText(formData.address),
+      city: sanitizeText(formData.city),
+      state: sanitizeText(formData.state),
+      zipCode: sanitizeText(formData.zipCode),
+      country: sanitizeText(formData.country),
+      notes: sanitizeText(formData.notes),
+      paymentMethod: 'card' as const,
+      acceptTerms,
+    };
+
+    const validation = checkoutSchema.safeParse(sanitizedForm);
+    if (!validation.success) {
+      setError(validation.error.issues[0]?.message || 'Revisa los datos del formulario.');
       return;
     }
+
+    setFormData(prev => ({ ...prev, ...sanitizedForm }));
 
     setProcessing(true);
     setError(null);
 
     try {
+      const safeForm = {
+        firstName: sanitizeText(formData.firstName),
+        lastName: sanitizeText(formData.lastName),
+        email: sanitizeText(formData.email).toLowerCase(),
+        phone: sanitizeText(formData.phone),
+        address: sanitizeText(formData.address),
+        city: sanitizeText(formData.city),
+        state: sanitizeText(formData.state),
+        zipCode: sanitizeText(formData.zipCode),
+        country: sanitizeText(formData.country),
+        notes: sanitizeText(formData.notes),
+      };
+
       // 1. Crear la orden en Supabase (estado pendiente)
       const createdOrder = await orderService.createOrder({
         user_id:          user.id,
@@ -157,15 +197,15 @@ const CheckoutForm = () => {
         discount,
         total,
         shipping_address: {
-          full_name: `${formData.firstName} ${formData.lastName}`,
-          phone:     formData.phone,
-          address:   formData.address,
-          city:      formData.city,
-          state:     formData.state,
-          zip_code:  formData.zipCode,
-          country:   formData.country,
+          full_name: `${safeForm.firstName} ${safeForm.lastName}`,
+          phone:     safeForm.phone,
+          address:   safeForm.address,
+          city:      safeForm.city,
+          state:     safeForm.state,
+          zip_code:  safeForm.zipCode,
+          country:   safeForm.country,
         } as any,
-        notes:  formData.notes,
+        notes:  safeForm.notes,
         items:  [] as OrderItem[],
       });
 
@@ -179,16 +219,16 @@ const CheckoutForm = () => {
           price:       item.product.price,
           quantity:    item.quantity,
         })),
-        customerEmail: formData.email,
-        customerName:  `${formData.firstName} ${formData.lastName}`,
+        customerEmail: safeForm.email,
+        customerName:  `${safeForm.firstName} ${safeForm.lastName}`,
         address: {
-          line1:       formData.address,
-          city:        formData.city,
-          state:       formData.state,
-          postal_code: formData.zipCode,
-          country:     formData.country,
+          line1:       safeForm.address,
+          city:        safeForm.city,
+          state:       safeForm.state,
+          postal_code: safeForm.zipCode,
+          country:     safeForm.country,
         },
-        metadata: { order_id: String(createdOrder.id), notes: formData.notes },
+        metadata: { order_id: String(createdOrder.id), notes: safeForm.notes },
         userId:   user.id,
         orderId:  createdOrder.id,
       });
@@ -201,15 +241,15 @@ const CheckoutForm = () => {
         payment_method: {
           card: cardNumber,
           billing_details: {
-            name:  `${formData.firstName} ${formData.lastName}`,
-            email:  formData.email,
-            phone:  formData.phone,
+            name:  `${safeForm.firstName} ${safeForm.lastName}`,
+            email:  safeForm.email,
+            phone:  safeForm.phone,
             address: {
-              line1:       formData.address,
-              city:        formData.city,
-              state:       formData.state,
-              postal_code: formData.zipCode,
-              country:     formData.country,
+              line1:       safeForm.address,
+              city:        safeForm.city,
+              state:       safeForm.state,
+              postal_code: safeForm.zipCode,
+              country:     safeForm.country,
             },
           },
         },
@@ -302,49 +342,49 @@ const CheckoutForm = () => {
                   <label htmlFor="firstName">Nombre *</label>
                   <input id="firstName" name="firstName" type="text"
                     value={formData.firstName} onChange={onChange}
-                    autoComplete="given-name" required />
+                    autoComplete="given-name" required maxLength={60} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="lastName">Apellido *</label>
                   <input id="lastName" name="lastName" type="text"
                     value={formData.lastName} onChange={onChange}
-                    autoComplete="family-name" required />
+                    autoComplete="family-name" required maxLength={60} />
                 </div>
                 <div className="form-group full">
                   <label htmlFor="email">Email *</label>
                   <input id="email" name="email" type="email"
                     value={formData.email} onChange={onChange}
-                    autoComplete="email" required />
+                    autoComplete="email" required maxLength={120} />
                 </div>
                 <div className="form-group full">
                   <label htmlFor="phone">Teléfono</label>
                   <input id="phone" name="phone" type="tel"
                     value={formData.phone} onChange={onChange}
-                    autoComplete="tel" />
+                    autoComplete="tel" maxLength={20} />
                 </div>
                 <div className="form-group full">
                   <label htmlFor="address">Dirección *</label>
                   <input id="address" name="address" type="text"
                     value={formData.address} onChange={onChange}
-                    autoComplete="street-address" required />
+                    autoComplete="street-address" required maxLength={160} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="city">Ciudad *</label>
                   <input id="city" name="city" type="text"
                     value={formData.city} onChange={onChange}
-                    autoComplete="address-level2" required />
+                    autoComplete="address-level2" required maxLength={80} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="state">Estado *</label>
                   <input id="state" name="state" type="text"
                     value={formData.state} onChange={onChange}
-                    autoComplete="address-level1" required />
+                    autoComplete="address-level1" required maxLength={80} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="zipCode">C.P. *</label>
                   <input id="zipCode" name="zipCode" type="text"
                     value={formData.zipCode} onChange={onChange}
-                    autoComplete="postal-code" required />
+                    autoComplete="postal-code" required maxLength={12} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="country">País *</label>
@@ -361,7 +401,7 @@ const CheckoutForm = () => {
                   <label htmlFor="notes">Notas del pedido (opcional)</label>
                   <textarea id="notes" name="notes" rows={2}
                     value={formData.notes} onChange={onChange}
-                    placeholder="Instrucciones especiales de entrega…" />
+                    placeholder="Instrucciones especiales de entrega…" maxLength={300} />
                 </div>
               </div>
             </div>
@@ -405,6 +445,16 @@ const CheckoutForm = () => {
               </div>
 
               {/* Logos de tarjetas aceptadas */}
+              <label className="checkout-terms-row">
+                <input
+                  type="checkbox"
+                  checked={acceptTerms}
+                  onChange={e => setAcceptTerms(e.target.checked)}
+                  required
+                />
+                <span>Acepto los términos, la política de privacidad y que la transacción se procesa de forma segura por Stripe.</span>
+              </label>
+
               <div className="accepted-cards">
                 <span>Aceptamos:</span>
                 <i className="fa-brands fa-cc-visa" title="Visa"></i>

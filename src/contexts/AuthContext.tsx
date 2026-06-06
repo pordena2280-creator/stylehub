@@ -89,8 +89,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await authService.loginWithGoogle('/auth/callback');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Error con Google';
-      setError(msg);
-      throw err;
+      const friendly = translateAuthError(msg);
+      setError(friendly);
+      throw new Error(friendly);
     }
   };
 
@@ -100,8 +101,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await authService.loginWithGoogleAdmin();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Error con Google';
-      setError(msg);
-      throw err;
+      const friendly = translateAuthError(msg);
+      setError(friendly);
+      throw new Error(friendly);
     }
   };
 

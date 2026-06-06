@@ -256,7 +256,7 @@
 
 /* Hamburger */
 .hamburger {
-  display: none;
+  display: none !important;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
@@ -442,7 +442,22 @@
 }
 
 @media (max-width: 1023px) {
-  .hamburger { display: flex; }
+  .hamburger { display: flex !important; }
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 497;
+}
+
+.mobile-nav-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @media (max-width: 768px) {
