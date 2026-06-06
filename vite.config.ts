@@ -31,6 +31,30 @@ export default defineConfig({
     'import.meta.env.VITE_APP_NAME': JSON.stringify('StyleHub'),
     'import.meta.env.VITE_APP_URL': JSON.stringify('https://stylehub-2.vercel.app'),
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-router') || id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('@stripe') || id.includes('stripe')) {
+              return 'stripe';
+            }
+            if (id.includes('@supabase')) {
+              return 'supabase';
+            }
+            if (id.includes('@heroicons') || id.includes('lucide-react') || id.includes('fontawesome')) {
+              return 'icons';
+            }
+            return 'vendor';
+          }
+          return undefined;
+        },
+      },
+    },
+  },
   optimizeDeps: {
     entries: ['./src/main.tsx'],
     exclude: ['js/zoom.js', 'js/sibforms.js'],

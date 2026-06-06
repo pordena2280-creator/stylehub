@@ -439,3 +439,13 @@
   .newsletter-form-wrap input { border-radius: 4px; }
   .newsletter-form-wrap button { border-radius: 4px; justify-content: center; }
 }
+@media (max-width: 480px) {
+  .hero-title { font-size: 24px; }
+  .hero-desc { font-size: 14px; }
+  .hero-actions { flex-direction: column; }
+  .hero-btn-primary, .hero-btn-outline { width: 100%; justify-content: center; }
+  .hero-stats { flex-direction: column; gap: 16px; }
+  .hero-stat-num { font-size: 20px; }
+  .promo-card { padding: 20px; }
+  .promo-card-title { font-size: 20px; }
+}

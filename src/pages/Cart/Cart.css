@@ -448,3 +448,12 @@
 
 /* ===== FONTAWESOME ICON SIZING ===== */
 .tf-sp-cart .fa-cart-shopping { font-size: inherit; }
+
+/* ===== RESPONSIVE 480px ===== */
+@media (max-width: 480px) {
+  .tf-sp-cart { padding: 14px 0 30px; }
+  .cart-coupon { max-width: 100%; }
+  .box-btn { flex-direction: column; }
+  .cart-summary { padding: 14px; }
+  .summary-title { font-size: 16px; }
+}
