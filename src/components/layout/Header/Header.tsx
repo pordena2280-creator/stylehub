@@ -51,7 +51,7 @@ const Header = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (!mobileOpen) return;
+    if (!mobileOpen) return undefined;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setMobileOpen(false);
