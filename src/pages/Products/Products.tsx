@@ -132,10 +132,9 @@ const Products = () => {
           )}
         </div>
 
-        <div className="row">
+        <div className="products-row">
           {/* ===== SIDEBAR ===== */}
-          <div className="col-lg-3">
-            <div className="products-sidebar">
+          <div className="products-sidebar">
 
               {/* Búsqueda */}
               <div className="filter-section">
@@ -257,11 +256,10 @@ const Products = () => {
                   <span>Solo productos en stock</span>
                 </label>
               </div>
-            </div>
           </div>
 
           {/* ===== GRID DE PRODUCTOS ===== */}
-          <div className="col-lg-9">
+          <div className="products-col">
             {/* Toolbar */}
             <div className="products-toolbar">
                 <div className="toolbar-left">
@@ -508,9 +506,9 @@ const Products = () => {
               </div>
             )}
           </div>
-        </div>
-      </div>
-    </div>
+        </div>  {/* /products-row */}
+      </div>    {/* /container */}
+    </div>      {/* /products-page */}
   );
 };
 
