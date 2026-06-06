@@ -35,7 +35,7 @@ export const invoiceService = {
       .eq('order_id', orderId)
       .maybeSingle();
     if (error) return null;
-    return data as Invoice | null;
+    return (data as Invoice | null) ?? null;
   },
 
   // Obtener factura por ID
@@ -44,9 +44,9 @@ export const invoiceService = {
       .from('invoices')
       .select('*')
       .eq('id', id)
-      .single();
+      .maybeSingle();
     if (error) return null;
-    return data as Invoice;
+    return (data as Invoice | null) ?? null;
   },
 
   // Crear factura para una orden
@@ -55,7 +55,7 @@ export const invoiceService = {
     tax_amount: number;
     discount_amount: number;
     total: number;
-  }): Promise<Invoice> {
+  }): Promise<Invoice | null> {
     const invoiceNumber = `FAC-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${String(orderId).padStart(6, '0')}`;
     const { data, error } = await supabase
       .from('invoices')
@@ -66,21 +66,21 @@ export const invoiceService = {
         status: 'emitida',
       })
       .select()
-      .single();
-    if (error) throw error;
-    return data as Invoice;
+      .maybeSingle();
+    if (error) return null;
+    return (data as Invoice | null) ?? null;
   },
 
   // Actualizar factura (ej: añadir pdf_url o cambiar estado)
-  async updateInvoice(id: number, updates: Partial<Omit<Invoice, 'id' | 'created_at'>>): Promise<Invoice> {
+  async updateInvoice(id: number, updates: Partial<Omit<Invoice, 'id' | 'created_at'>>): Promise<Invoice | null> {
     const { data, error } = await supabase
       .from('invoices')
       .update({ ...updates, updated_at: new Date().toISOString() })
       .eq('id', id)
       .select()
-      .single();
-    if (error) throw error;
-    return data as Invoice;
+      .maybeSingle();
+    if (error) return null;
+    return (data as Invoice | null) ?? null;
   },
 
   // Listar facturas (admin) con paginación
@@ -91,7 +91,7 @@ export const invoiceService = {
       .select('*', { count: 'exact' })
       .order('issued_at', { ascending: false })
       .range(from, from + limit - 1);
-    if (error) throw error;
+    if (error) return { data: [], total: 0, page, limit, totalPages: 0 };
     return {
       data: (data as Invoice[]) || [],
       total: count || 0,
