@@ -77,7 +77,7 @@ body {
   background-color: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   /* CRÍTICO: quitar display:flex y place-items del Vite default */
   display: block;
   min-height: 100vh;
