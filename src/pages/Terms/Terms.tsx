@@ -24,7 +24,7 @@ const Terms = () => {
             <p>Al acceder y utilizar este sitio web, usted acepta estar sujeto a los siguientes términos y condiciones ("Términos"), así como a todas las leyes y regulaciones aplicables. Si no está de acuerdo con alguno de estos términos, está prohibido utilizar o acceder a este sitio. Los materiales contenidos en este sitio web están protegidos por las leyes aplicables de derecho de autor y marca registrada.</p>
             
             <h2>2. Uso del Sitio</h2>
-            <p>Se le concede permiso para descargar temporalmente una copia de los materiales (información o software) en el sitio web de TechStore para visualización transitoria personal y no comercial únicamente. Esta es la concesión de una licencia, no una transferencia de título, y bajo esta licencia no puede:</p>
+            <p>Se le concede permiso para descargar temporalmente una copia de los materiales (información o software) en el sitio web de StyleHub para visualización transitoria personal y no comercial únicamente. Esta es la concesión de una licencia, no una transferencia de título, y bajo esta licencia no puede:</p>
             <ul>
               <li>modificar o copiar los materiales;</li>
               <li>utilizar los materiales para cualquier propósito comercial o para exhibición pública (comercial o no comercial);</li>

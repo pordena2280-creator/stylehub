@@ -97,7 +97,7 @@ const AdminLayout = () => {
         <div className="sidebar-header">
           <Link to="/admin" className="sidebar-logo">
             <i className="fa-solid fa-store sidebar-logo-icon"></i>
-            {sidebarOpen && <span className="sidebar-logo-text">TechStore</span>}
+            {sidebarOpen && <span className="sidebar-logo-text">StyleHub Admin</span>}
           </Link>
           <button
             className="sidebar-toggle"
@@ -157,7 +157,7 @@ const AdminLayout = () => {
               className="mobile-toggle"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
-              <i className="fa-solid fa-bars"></i>
+              <i className="fa-solid fa-list"></i>
             </button>
             <div className="topbar-breadcrumb">
               <span className="breadcrumb-home">
