@@ -221,6 +221,7 @@ const Header = () => {
               <li key={link.to} className="nav-item">
                 <Link
                   to={link.to}
+                  onClick={() => setMobileOpen(false)}
                   className={`nav-link ${isActive(link.to, link.exact) ? 'active' : ''}`}
                 >
                   {link.label}
@@ -230,11 +231,11 @@ const Header = () => {
           </ul>
 
           <div className="navbar-extra">
-            <Link to="/compare" className="navbar-extra-link">
+            <Link to="/compare" className="navbar-extra-link" onClick={() => setMobileOpen(false)}>
               <i className="fa-solid fa-code-compare"></i>
               Comparar
             </Link>
-            <Link to="/admin" className="navbar-extra-link admin-link">
+            <Link to="/admin" className="navbar-extra-link admin-link" onClick={() => setMobileOpen(false)}>
               <i className="fa-solid fa-gauge"></i>
               Admin
             </Link>

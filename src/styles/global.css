@@ -156,7 +156,17 @@ input, select, textarea {
 }
 
 textarea { resize: none; }
-select { outline: none; }
+select {
+  outline: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--gray-2) 50%),
+    linear-gradient(135deg, var(--gray-2) 50%, transparent 50%);
+  background-position: calc(100% - 14px) calc(50% - 2px), calc(100% - 9px) calc(50% - 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 28px;
+}
 
 /* ===== CONTENEDOR PRINCIPAL (igual que el original: max 1520px) ===== */
 .container {
@@ -240,6 +250,71 @@ select { outline: none; }
 .d-block   { display: block !important; }
 .d-flex    { display: flex !important; }
 .d-grid    { display: grid !important; }
+
+/* Visual system helpers for uniform cards/buttons/forms */
+.surface-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fcfdff 100%);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+}
+
+.soft-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 16px;
+}
+
+.brand-btn,
+.brand-btn-primary,
+.brand-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 700;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.brand-btn:hover,
+.brand-btn-primary:hover,
+.brand-btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.brand-btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, #fb7185 100%);
+  color: var(--white);
+  box-shadow: 0 10px 18px rgba(255, 61, 61, 0.18);
+}
+
+.brand-btn-secondary {
+  background: linear-gradient(135deg, #111827 0%, #334155 100%);
+  color: var(--white);
+}
+
+.brand-input,
+.brand-select,
+.brand-textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: var(--white);
+  color: var(--gray);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brand-input:focus,
+.brand-select:focus,
+.brand-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 61, 61, 0.08);
+  outline: none;
+}
 
 .align-items-center    { align-items: center !important; }
 .justify-content-center  { justify-content: center !important; }

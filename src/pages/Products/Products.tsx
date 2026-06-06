@@ -506,9 +506,9 @@ const Products = () => {
               </div>
             )}
           </div>
-        </div>  {/* /products-row */}
-      </div>    {/* /container */}
-    </div>      {/* /products-page */}
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -7,6 +7,8 @@
   --admin-primary-dark: #D80027;
   --admin-secondary: #004ec3;
   --admin-gray: #333e48;
+  --admin-radius: 16px;
+  --admin-radius-sm: 12px;
   --admin-gray-light: #909090;
   --admin-gray-lighter: #f5f5f5;
   --admin-border: #e1e1e1;
@@ -49,7 +51,7 @@
 .btn-success {
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -129,7 +131,7 @@
   width: 100%;
   padding: 10px 12px 10px 36px;
   border: 1px solid var(--admin-border);
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 13px;
   outline: none;
   transition: var(--admin-transition);
@@ -182,9 +184,9 @@
 .table-card {
   background: #fff;
   border: 1px solid var(--admin-border);
-  border-radius: 4px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: var(--admin-shadow);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
 }
 
 .table-wrapper {
@@ -431,7 +433,7 @@
 .form-textarea {
   padding: 10px 12px;
   border: 1px solid var(--admin-border);
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 13px;
   font-family: 'Inter', sans-serif;
   outline: none;
@@ -462,7 +464,7 @@
 .admin-warning,
 .admin-info {
   padding: 12px 16px;
-  border-radius: 4px;
+  border-radius: 14px;
   font-size: 13px;
   display: flex;
   align-items: center;
