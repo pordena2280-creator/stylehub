@@ -33,7 +33,7 @@ const AdminLayout = () => {
         <div className="sidebar-header">
           <Link to="/admin" className="sidebar-logo">
             <i className="fa-solid fa-cart-shopping"></i>
-            {sidebarOpen && <span>TechStore Admin</span>}
+             {sidebarOpen && <span>StyleHub Admin</span>}
           </Link>
           <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
             <i className={`fa-solid fa-${sidebarOpen ? 'chevron-left' : 'chevron-right'}`}></i>
