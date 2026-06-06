@@ -7,36 +7,42 @@ import type { Product } from '../types';
  * @param product - El producto del cual obtener la imagen
  * @returns URL pública válida de la imagen
  */
+const getSupabaseBaseUrl = () =>
+  import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, '') ||
+  'https://ccfhpovymmqgjtyybfpw.supabase.co';
+
+const normalizeStoragePath = (imagePath: string): string => {
+  const cleanPath = imagePath.trim();
+
+  if (!cleanPath) return '';
+
+  if (/^https?:\/\//i.test(cleanPath)) return cleanPath;
+
+  if (cleanPath.startsWith('/storage/v1/object/public/')) {
+    return `${getSupabaseBaseUrl()}${cleanPath}`;
+  }
+
+  if (cleanPath.startsWith('storage/v1/object/public/')) {
+    return `${getSupabaseBaseUrl()}/${cleanPath}`;
+  }
+
+  if (cleanPath.startsWith('object/public/')) {
+    return `${getSupabaseBaseUrl()}/storage/v1/${cleanPath}`;
+  }
+
+  if (cleanPath.startsWith('public/')) {
+    return `${getSupabaseBaseUrl()}/storage/v1/object/${cleanPath}`;
+  }
+
+  return `${getSupabaseBaseUrl()}/storage/v1/object/public/${cleanPath.replace(/^\//, '')}`;
+};
+
 export const getProductImageUrl = (product: Product): string => {
-  // Si no hay imágenes o el array está vacío, devolver placeholder
   if (!product.images || product.images.length === 0) {
     return '/images/products/placeholder.jpg';
   }
 
-  // Tomar la primera imagen
-  const imageUrl = product.images[0];
-
-  // Si la URL ya es absoluta (http:// o https://), devolverla tal cual
-  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-    return imageUrl;
-  }
-
-  // Si es una ruta relativa de Supabase Storage, construir la URL completa
-  // Nota: El proyecto de Supabase es: ccfhpovymmqgjtyybfpw (debe coincidir con .env)
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, '') || 
-                      'https://ccfhpovymmqgjtyybfpw.supabase.co';
-
-  if (imageUrl.startsWith('/storage/v1/object/public/')) {
-    return `${supabaseUrl}${imageUrl}`;
-  }
-
-  // Si es solo un nombre de archivo o ruta relativa al bucket
-  if (!imageUrl.startsWith('http')) {
-    return `${supabaseUrl}/storage/v1/object/public/product-images/${imageUrl}`;
-  }
-
-  // Por defecto, devolver la URL tal como está (por si acaso)
-  return imageUrl;
+  return normalizeStoragePath(product.images[0]);
 };
 
 /**
@@ -50,27 +56,7 @@ export const getProductImagesUrls = (product: Product): string[] => {
     return ['/images/products/placeholder.jpg'];
   }
 
-  return product.images.map(imageUrl => {
-    // Si la URL ya es absoluta, devolverla tal cual
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-      return imageUrl;
-    }
-
-    // Construir URL completa de Supabase Storage
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, '') || 
-                        'https://ccfhpovymmqgjtyybfpw.supabase.co';
-
-    if (imageUrl.startsWith('/storage/v1/object/public/')) {
-      return `${supabaseUrl}${imageUrl}`;
-    }
-
-    // Si es solo un nombre de archivo o ruta relativa al bucket
-    if (!imageUrl.startsWith('http')) {
-      return `${supabaseUrl}/storage/v1/object/public/product-images/${imageUrl}`;
-    }
-
-    return imageUrl;
-  });
+  return product.images.map(imageUrl => normalizeStoragePath(imageUrl));
 };
 
 /**
@@ -83,15 +69,6 @@ export const getImageUrlFromPath = (imagePath: string): string => {
   if (!imagePath) {
     return '/images/products/placeholder.jpg';
   }
-  // Si ya es una URL absoluta, devolverla tal cual
-  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-    return imagePath;
-  }
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, '') || 
-                      'https://ccfhpovymmqgjtyybfpw.supabase.co';
-  if (imagePath.startsWith('/storage/v1/object/public/')) {
-    return `${supabaseUrl}${imagePath}`;
-  }
-  // Asumimos que es una ruta relativa al bucket de producto-imagenes
-  return `${supabaseUrl}/storage/v1/object/public/product-images/${imagePath}`;
+
+  return normalizeStoragePath(imagePath);
 };

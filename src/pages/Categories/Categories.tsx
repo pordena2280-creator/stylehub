@@ -4,6 +4,7 @@ import { categoryService } from '../../services';
 import { useCmsSection } from '../../hooks/useCmsSection';
 import Seo from '../../components/seo/Seo';
 import type { Category } from '../../types';
+import { getImageUrlFromPath } from '../../utils/imageUtils';
 import './Categories.css';
 
 // Mapa de iconos de FontAwesome por slug (fallback visual)
@@ -154,7 +155,7 @@ const Categories = () => {
                     <div className="cat-card-img-wrap">
                       {cat.image_url ? (
                         <img
-                          src={cat.image_url}
+                          src={getImageUrlFromPath(cat.image_url || '')}
                           alt={cat.name}
                           className="cat-card-img"
                           onError={e => {

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { categoryService } from '../../../services';
 import type { Category } from '../../../types';
 import ImageUploader from '../../../components/ui/ImageUploader/ImageUploader';
+import { getImageUrlFromPath } from '../../../utils/imageUtils';
 import './AdminCategories.css';
 
 const AdminCategories = () => {
@@ -140,7 +141,7 @@ const AdminCategories = () => {
             {/* Imagen de la categoría */}
             {cat.image_url && (
               <div className="cat-card-img-preview">
-                <img src={cat.image_url} alt={cat.name} onError={e => { (e.currentTarget.parentElement!.style.display = 'none'); }} />
+                <img src={getImageUrlFromPath(cat.image_url || '')} alt={cat.name} onError={e => { (e.currentTarget.parentElement!.style.display = 'none'); }} />
               </div>
             )}
             <div className="cat-card-header">

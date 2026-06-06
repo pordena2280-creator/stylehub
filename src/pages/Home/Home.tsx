@@ -7,7 +7,7 @@ import { useFeaturedProducts } from '../../hooks/useProducts';
 import { useCart } from '../../contexts/CartContext';
 import { blogService } from '../../services/blogService';
 import type { BlogPost, Product } from '../../types';
-import { getProductImageUrl } from '../../utils/imageUtils';
+import { getImageUrlFromPath, getProductImageUrl } from '../../utils/imageUtils';
 import Seo from '../../components/seo/Seo';
 import './Home.css';
 
@@ -144,7 +144,7 @@ const Home = () => {
               {categories.slice(0, 6).map(cat => (
                 <Link to={`/products?category=${cat.slug}`} key={cat.id} className="category-card">
                   {cat.image_url ? (
-                    <img src={cat.image_url} alt={cat.name} className="category-card-img"
+                    <img src={getImageUrlFromPath(cat.image_url || '')} alt={cat.name} className="category-card-img"
                       style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 8 }} />
                   ) : (
                     <span className="category-card-icon"><i className={cat.icon || 'fa-solid fa-tag'} /></span>
