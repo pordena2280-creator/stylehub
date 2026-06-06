@@ -5,7 +5,8 @@ import { useBanners } from '../../hooks/useBanners';
 import { useCategories } from '../../hooks/useCategories';
 import { useFeaturedProducts } from '../../hooks/useProducts';
 import { useCart } from '../../contexts/CartContext';
-import type { Product } from '../../types';
+import { blogService } from '../../services/blogService';
+import type { BlogPost, Product } from '../../types';
 import { getProductImageUrl } from '../../utils/imageUtils';
 import Seo from '../../components/seo/Seo';
 import './Home.css';
@@ -22,9 +23,25 @@ const Home = () => {
 
   // Contador regresivo para Flash Deals (1 día = 86400 s)
   const [flashCount, setFlashCount] = useState<number>(86400);
+  const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
+
   useEffect(() => {
     const id = setInterval(() => setFlashCount(prev => Math.max(prev - 1, 0)), 1000);
     return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadRecentPosts = async () => {
+      try {
+        const data = await blogService.getRecentPosts(3);
+        if (!cancelled) setRecentPosts(data);
+      } catch {
+        if (!cancelled) setRecentPosts([]);
+      }
+    };
+    loadRecentPosts();
+    return () => { cancelled = true; };
   }, []);
 
   const days  = Math.floor(flashCount / 86400);
@@ -201,7 +218,36 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ── 5. BANNER PROMOCIONAL ───────────────────────────────── */}
+        {/* ── 5. ARTÍCULOS RECIENTES / CMS ─────────────────────── */}
+        {recentPosts.length > 0 && (
+          <section className="recent-posts-section">
+            <div className="container">
+              <div className="section-header-row">
+                <div>
+                  <h2 className="tf-heading-title">Artículos recientes</h2>
+                  <p className="tf-heading-desc">Contenido dinámico del blog gestionado desde el panel Admin.</p>
+                </div>
+                <Link to="/blog" className="view-all-link">Ver blog <i className="fa-solid fa-arrow-right"></i></Link>
+              </div>
+              <div className="recent-posts-grid">
+                {recentPosts.map(post => (
+                  <article key={post.id} className="recent-post-card surface-card">
+                    <Link to={`/blog/${post.id}`} className="recent-post-image-wrap">
+                      <img src={post.image_url || '/images/blog/blog-1.jpg'} alt={post.title} />
+                    </Link>
+                    <div className="recent-post-content">
+                      <p className="recent-post-category">{post.category || 'Blog'}</p>
+                      <Link to={`/blog/${post.id}`} className="recent-post-title">{post.title}</Link>
+                      <p className="recent-post-excerpt">{post.excerpt || 'Nuevo contenido publicado desde Admin → Blog.'}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 6. BANNER PROMOCIONAL ───────────────────────────────── */}
         <section className="promo-section">
           <div className="container">
             <div className="promo-grid">
@@ -225,7 +271,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ── 6. FLASH DEALS — conectados a productos reales ─────── */}
+        {/* ── 7. FLASH DEALS — conectados a productos reales ─────── */}
         {flashDeals.length > 0 && (
           <section className="flash-deals-section">
             <div className="container">
@@ -284,7 +330,7 @@ const Home = () => {
           </section>
         )}
 
-        {/* ── 7. MARCAS ───────────────────────────────────────────── */}
+        {/* ── 8. MARCAS ───────────────────────────────────────────── */}
         <section className="brands-section">
           <div className="container">
             <div className="section-header-row">

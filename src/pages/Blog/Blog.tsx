@@ -71,7 +71,10 @@ const Blog = () => {
               {loading ? (
                 <p>Cargando artículos…</p>
               ) : posts.length === 0 ? (
-                <p>No hay artículos publicados. Crea posts desde el panel Admin → Blog.</p>
+                <div className="empty-blog-state">
+                  <p>No hay artículos publicados todavía.</p>
+                  <p>Desde Admin → Blog puedes crear contenido dinámico y aparecerá automáticamente en la home y en la sección Recientes.</p>
+                </div>
               ) : (
                 <div className="blog-grid">
                   {posts.map(post => (
