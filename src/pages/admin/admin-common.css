@@ -189,6 +189,18 @@
 
 .table-wrapper {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .admin-table {
+    min-width: 720px;
+    font-size: 12px;
+  }
+  .admin-table th,
+  .admin-table td {
+    padding: 10px 12px;
+  }
 }
 
 .admin-table {

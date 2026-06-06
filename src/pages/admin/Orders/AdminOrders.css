@@ -128,3 +128,59 @@
 .status-option:hover {
   border-color: #0ea5e9;
 }
+
+/* ===== RESPONSIVE TABLES ===== */
+@media (max-width: 768px) {
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 4px;
+    border: 1px solid #e1e1e1;
+  }
+  .admin-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 20px;
+  }
+  .orders-summary {
+    gap: 6px;
+  }
+  .summary-chip {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  .filter-tabs {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .filter-tab {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .admin-table {
+    min-width: 720px;
+    font-size: 13px;
+  }
+  .admin-table th,
+  .admin-table td {
+    padding: 10px 12px;
+  }
+  .customer-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  .customer-name {
+    font-size: 12px;
+  }
+  .customer-email {
+    font-size: 10px;
+  }
+}
