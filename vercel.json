@@ -1,4 +1,11 @@
 {
   "framework": "vite",
+  "env": {
+    "VITE_SUPABASE_URL": "https://ccfhpovymmqgjtyybfpw.supabase.co",
+    "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZmhwb3Z5bW1xZ2p0eXliZnB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MjEzNjgsImV4cCI6MjA5NDA5NzM2OH0.YEJGy855z6UGf8p5xAoNseAYNEZ8iQ-FXQFBnbZCh0Y",
+    "VITE_STRIPE_PUBLISHABLE_KEY": "pk_test_51StRrHERhDWcEo0iFJ3ejrBG1HzU5rXO0E2lc3mE0TlnYiPgfaKacAFiV04qhVhKuzKsu054SOlp5VPbH2cg0UgA00UKcqw9ta",
+    "VITE_APP_NAME": "StyleHub",
+    "VITE_APP_URL": "https://stylehub-2-n0hzt4d1d-pordena2280-s-projects.vercel.app"
+  },
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
