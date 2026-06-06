@@ -134,14 +134,14 @@ export const MEXICAN_STATES = [
  * CATEGORÍA DE PRODUCTOS
  */
 export const PRODUCT_CATEGORIES = {
-  electronics: 'Electrónica',
-  clothing: 'Ropa',
-  books: 'Libros',
-  home: 'Hogar',
-  sports: 'Deportes',
-  toys: 'Juguetes',
-  food: 'Alimentos',
-  beauty: 'Belleza',
+  accesorios: 'Accesorios',
+  audio: 'Audio',
+  camaras: 'Cámaras',
+  laptops: 'Laptops',
+  monitores: 'Monitores',
+  smartphones: 'Smartphones',
+  tablets: 'Tablets',
+  wearables: 'Wearables',
 } as const;
 
 /**
@@ -238,7 +238,7 @@ export const REGEX = {
  * CONFIGURACIÓN LOCAL
  */
 export const APP_CONFIG = {
-  name: 'TechStore',
+  name: 'StyleHub',
   version: '1.0.0',
   language: 'es-MX',
   timezone: 'America/Mexico_City',

@@ -88,7 +88,7 @@ const Footer = () => {
                     <path d="M8 10h16M8 16h10M8 22h13" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
                   </svg>
                 </div>
-                <span className="footer-logo-text">TechStore</span>
+                <span className="footer-logo-text">StyleHub</span>
               </Link>
               <p className="footer-desc">
                 Tu tienda de tecnología de confianza. Los mejores productos electrónicos con garantía y envío rápido.
@@ -186,7 +186,7 @@ const Footer = () => {
         <div className="footer-container">
           <div className="footer-bottom-inner">
             <p className="footer-copyright">
-              © {new Date().getFullYear()} TechStore. Todos los derechos reservados.
+               © {new Date().getFullYear()} StyleHub. Todos los derechos reservados.
             </p>
             <div className="footer-payment-methods">
               <div className="payment-icons">
