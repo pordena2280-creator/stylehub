@@ -9,14 +9,18 @@ import './Categories.css';
 
 // Mapa de iconos de FontAwesome por slug (fallback visual)
 const CATEGORY_COLORS: Record<string, string> = {
-  smartphones:  '#FF6B6B',
-  laptops:      '#4ECDC4',
-  auriculares:  '#45B7D1',
-  smartwatch:   '#96CEB4',
-  tablets:      '#FFEAA7',
-  accesorios:   '#DDA0DD',
-  gaming:       '#98D8C8',
-  fotografia:   '#F7DC6F',
+  ropa: '#FF7A59',
+  calzado: '#4ECDC4',
+  accesorios: '#DDA0DD',
+  electronica: '#45B7D1',
+  hogar: '#96CEB4',
+  smartphones: '#FF6B6B',
+  laptops: '#4ECDC4',
+  auriculares: '#45B7D1',
+  smartwatch: '#96CEB4',
+  tablets: '#FFEAA7',
+  gaming: '#98D8C8',
+  fotografia: '#F7DC6F',
 };
 
 const Categories = () => {

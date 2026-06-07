@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCmsSection } from '../../../hooks/useCmsSection';
+import { PRODUCT_CATEGORIES } from '../../../utils/constants';
 import './Footer.css';
 
 const Footer = () => {
@@ -18,6 +19,7 @@ const Footer = () => {
   const newsletterTitle = newsletterCms?.title || 'Newsletter';
   const newsletterDescription = newsletterCms?.description ||
     'Suscríbete y recibe ofertas exclusivas, novedades y descuentos especiales.';
+  const footerCategoryLinks = Object.entries(PRODUCT_CATEGORIES);
   const paymentDescription = paymentCms?.description || 'Aceptamos VISA, Mastercard, PayPal y más.';
 
   const handleNewsletter = (e: React.FormEvent) => {
@@ -126,14 +128,9 @@ const Footer = () => {
             <div className="footer-col">
               <h3 className="footer-col-title">Categorías</h3>
               <ul className="footer-links">
-                <li><Link to="/products?category=accesorios">Accesorios</Link></li>
-                <li><Link to="/products?category=audio">Audio</Link></li>
-                <li><Link to="/products?category=camaras">Cámaras</Link></li>
-                <li><Link to="/products?category=laptops">Laptops</Link></li>
-                <li><Link to="/products?category=monitores">Monitores</Link></li>
-                <li><Link to="/products?category=smartphones">Smartphones</Link></li>
-                <li><Link to="/products?category=tablets">Tablets</Link></li>
-                <li><Link to="/products?category=wearables">Wearables</Link></li>
+                {footerCategoryLinks.map(([slug, label]) => (
+                  <li key={slug}><Link to={`/products?category=${slug}`}>{label}</Link></li>
+                ))}
               </ul>
             </div>
 

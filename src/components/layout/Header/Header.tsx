@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCmsSection } from '../../../hooks/useCmsSection';
 import { useCart } from '../../../contexts/CartContext';
 import { useAuth } from '../../../contexts/AuthContext';
+import { PRODUCT_CATEGORIES } from '../../../utils/constants';
 import './Header.css';
 
 const navLinks = [
@@ -36,6 +37,7 @@ const Header = () => {
   const { items } = useCart();
   const { isAuthenticated } = useAuth();
 
+  const categoryOptions = Object.entries(PRODUCT_CATEGORIES);
   const cartCount = items?.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
   const isLoggedIn = isAuthenticated;
 
@@ -160,13 +162,9 @@ const Header = () => {
           <form className="header-search" onSubmit={handleSearch}>
             <select className="search-category">
               <option value="">Todas las categorías</option>
-              <option value="smartphones">Smartphones</option>
-              <option value="laptops">Laptops</option>
-              <option value="tablets">Tablets</option>
-              <option value="audio">Audio</option>
-              <option value="wearables">Wearables</option>
-              <option value="camaras">Cámaras</option>
-              <option value="accesorios">Accesorios</option>
+              {categoryOptions.map(([slug, label]) => (
+                <option key={slug} value={slug}>{label}</option>
+              ))}
             </select>
             <input
               type="text"

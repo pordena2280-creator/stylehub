@@ -134,7 +134,11 @@ export const MEXICAN_STATES = [
  * CATEGORÍA DE PRODUCTOS
  */
 export const PRODUCT_CATEGORIES = {
+  ropa: 'Ropa',
+  calzado: 'Calzado',
   accesorios: 'Accesorios',
+  electronica: 'Electrónica',
+  hogar: 'Hogar',
   audio: 'Audio',
   camaras: 'Cámaras',
   laptops: 'Laptops',
@@ -142,6 +146,7 @@ export const PRODUCT_CATEGORIES = {
   smartphones: 'Smartphones',
   tablets: 'Tablets',
   wearables: 'Wearables',
+  tv: 'TV',
 } as const;
 
 /**
