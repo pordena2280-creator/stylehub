@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { orderService, productService, categoryService } from '../../../services';
+import { orderService, productService } from '../../../services';
 import { loyaltyService } from '../../../services/loyaltyService';
 import { notificationService } from '../../../services/notificationService';
 import { affiliateService } from '../../../services/affiliateService';
@@ -26,7 +26,6 @@ const AdminDashboard = () => {
   ]);
   const [recentOrders, setRecentOrders] = useState<Order[]>([]);
   const [topProducts, setTopProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [loyaltyStats, setLoyaltyStats] = useState<{ points_balance: number; total_users: number }>({ points_balance: 0, total_users: 0 });
   const [notificationStats, setNotificationStats] = useState<{ pending: number; sent: number; failed: number; delivered: number; read: number }>({ pending: 0, sent: 0, failed: 0, delivered: 0, read: 0 });
   const [affiliateStats, setAffiliateStats] = useState<{ total: number; active: number; earnings: number }>({ total: 0, active: 0, earnings: 0 });
@@ -37,17 +36,10 @@ const AdminDashboard = () => {
     const load = async () => {
       try {
         // Load all data in parallel
-        const [
-          salesRes,
-          ordersRes,
-          productsRes,
-          categoriesRes,
-          notificationRes,
-        ] = await Promise.all([
+        const [salesRes, ordersRes, productsRes, notificationRes] = await Promise.all([
           orderService.getSalesStats(),
-          orderService.getAllOrders(1, 25),
-          productService.getProducts({ limit: 100 }),
-          categoryService.getAllCategories(),
+          orderService.getAllOrders(1, 10),
+          productService.getProducts({ limit: 20 }),
           notificationService.getNotificationStats().catch(() => ({ pending: 0, sent: 0, failed: 0, delivered: 0, read: 0 })),
         ]);
 
@@ -80,8 +72,6 @@ const AdminDashboard = () => {
         const sorted = [...productsRes.data].sort((a, b) => (b.reviews_count || 0) - (a.reviews_count || 0)).slice(0, 5);
         setTopProducts(sorted);
 
-        setCategories(categoriesRes);
-        
         setLoyaltyStats(loyaltyRes);
         setNotificationStats(notificationRes);
         setAffiliateStats(affiliateRes);
@@ -119,10 +109,6 @@ const AdminDashboard = () => {
      }
    };
 
-  const getCategoryColor = (_name: string, index: number) => {
-    const colors = ['#ff3d3d', '#004ec3', '#22c55e', '#FCB500', '#94a3b8'];
-    return colors[index % colors.length];
-  };
 
   return (
     <div className="admin-dashboard">
@@ -320,34 +306,6 @@ const AdminDashboard = () => {
          </div>
        </div>
 
-       {/* Category Distribution */}
-       {!loading && categories.length > 0 && (
-         <div className="charts-row">
-           <div className="chart-card">
-             <div className="card-header">
-               <h3><i className="fa-solid fa-chart-pie"></i> Por Categoría</h3>
-             </div>
-<div className="category-stats">
-                {categories.map((cat, i) => {
-                  const max = Math.max(...categories.map(c => 0)); // No reviews_count in Category
-                  const pct = 5; // Default percentage since we don't have reviews_count
-                  return (
-                    <div key={cat.id} className="category-row">
-                      <div className="cat-info">
-                        <span className="cat-dot" style={{ background: getCategoryColor(cat.name, i) }}></span>
-                        <span className="cat-name">{cat.name}</span>
-                      </div>
-                      <div className="cat-bar-wrap">
-                        <div className="cat-bar" style={{ width: `${pct}%`, background: getCategoryColor(cat.name, i) }}></div>
-                      </div>
-                      <span className="cat-pct">Productos</span>
-                    </div>
-                  );
-                })}
-              </div>
-           </div>
-         </div>
-       )}
      </div>
    );
  };

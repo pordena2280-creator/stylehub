@@ -118,7 +118,7 @@ export const orderService = {
   async getSalesStats() {
     const { data, error } = await supabase
       .from('orders')
-      .select('total, status, created_at')
+      .select('total, status', { count: 'exact' })
       .neq('status', 'cancelado');
     if (error) throw error;
 
