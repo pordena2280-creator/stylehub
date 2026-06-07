@@ -63,6 +63,15 @@ const ProductDetail = () => {
     return () => window.removeEventListener('keydown', handleKey);
   }, [showLightbox, handleKey]);
 
+  useEffect(() => {
+    if (!showLightbox) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showLightbox]);
+
   if (loading) {
     return (
       <div className="product-detail-page">
@@ -286,6 +295,7 @@ const ProductDetail = () => {
               <img
                 src={images[lightboxIndex]}
                 alt={`${product.name} — imagen ${lightboxIndex + 1}`}
+                loading="eager"
                 onError={e => { (e.target as HTMLImageElement).src = '/images/products/placeholder.jpg'; }}
               />
               {images.length > 1 && (

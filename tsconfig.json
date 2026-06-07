@@ -23,6 +23,7 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
+    "ignoreDeprecations": "5.0",
 
     /* Path aliases */
     "baseUrl": ".",
