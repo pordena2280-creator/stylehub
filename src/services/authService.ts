@@ -33,7 +33,14 @@ export const authService = {
       password,
     });
     if (error) throw error;
-    await authService.syncProfileAfterAuth(data.user?.id, data.user?.email);
+    try {
+      await Promise.all([
+        staffInviteService.applyInviteForUser(data.user?.id || '', data.user?.email || ''),
+        authService.getUserProfile(data.user?.id || ''),
+      ]);
+    } catch {
+      // No bloquear el login si el perfil tarda
+    }
     return data;
   },
 
