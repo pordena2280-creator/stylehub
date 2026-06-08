@@ -157,11 +157,12 @@ const Categories = () => {
                   >
                     {/* Imagen o gradiente de color */}
                     <div className="cat-card-img-wrap">
-                      {cat.image_url ? (
+                        {cat.image_url ? (
                         <img
                           src={getImageUrlFromPath(cat.image_url || '')}
                           alt={cat.name}
                           className="cat-card-img"
+                          loading="lazy"
                           onError={e => {
                             (e.target as HTMLImageElement).style.display = 'none';
                             (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');

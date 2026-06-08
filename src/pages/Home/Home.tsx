@@ -145,6 +145,7 @@ const Home = () => {
                 <Link to={`/products?category=${cat.slug}`} key={cat.id} className="category-card">
                   {cat.image_url ? (
                     <img src={getImageUrlFromPath(cat.image_url || '')} alt={cat.name} className="category-card-img"
+                      loading="lazy"
                       style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 8 }} />
                   ) : (
                     <span className="category-card-icon"><i className={cat.icon || 'fa-solid fa-tag'} /></span>
@@ -184,7 +185,7 @@ const Home = () => {
                     {discount > 0 && <div className="product-card-badge sale">-{discount}%</div>}
                     <div className="product-card-img">
                       <Link to={`/product/${product.id}`}>
-                        <img src={img} alt={product.name}
+                        <img src={img} alt={product.name} loading="lazy"
                           onError={e => (e.currentTarget.src = '/images/products/placeholder.jpg')} />
                       </Link>
                     </div>

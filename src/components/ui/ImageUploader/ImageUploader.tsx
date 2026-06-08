@@ -78,10 +78,10 @@ const ImageUploader = ({
       if (uploadError) throw uploadError;
 
       const { data } = supabase.storage.from(bucket).getPublicUrl(path);
-      // Cache-bust para que la tienda muestre la imagen nueva al instante
-      const publicUrl = `${data.publicUrl}?t=${Date.now()}`;
-
-      setPreview(publicUrl);
+      // URL pública sin cache-bust para almacenar en la base de datos
+      const publicUrl = data.publicUrl;
+      // Para preview instantáneo añadimos parámetro temporal, pero NO lo guardamos
+      setPreview(`${publicUrl}?t=${Date.now()}`);
       onUpload(publicUrl);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Error al subir la imagen';
