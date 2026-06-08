@@ -20,6 +20,7 @@ const AdminCategories = () => {
     icon: 'fa-solid fa-tag',
     sort_order: 0,
     status: 'activa' as Category['status'],
+    parent_id: null as number | null,
   });
   // imagen gestionada por separado para el uploader
   const [imageUrl, setImageUrl] = useState<string>('');
@@ -46,7 +47,7 @@ const AdminCategories = () => {
 
   const openCreate = () => {
     setEditingCat(null);
-    setFormData({ name: '', slug: '', description: '', icon: 'fa-solid fa-tag', sort_order: 0, status: 'activa' });
+    setFormData({ name: '', slug: '', description: '', icon: 'fa-solid fa-tag', sort_order: 0, status: 'activa', parent_id: null });
     setImageUrl('');
     setShowModal(true);
   };
@@ -59,6 +60,7 @@ const AdminCategories = () => {
       icon: cat.icon || 'fa-solid fa-tag',
       sort_order: cat.sort_order || 0,
       status: cat.status,
+      parent_id: cat.parent_id ?? null,
     });
     setImageUrl(cat.image_url || '');
     setShowModal(true);
@@ -78,6 +80,7 @@ const AdminCategories = () => {
         image_url: imageUrl || null,
         sort_order: formData.sort_order,
         status: formData.status,
+        parent_id: formData.parent_id || null,
       };
       if (editingCat) {
         await categoryService.updateCategory(editingCat.id, payload);
@@ -155,6 +158,9 @@ const AdminCategories = () => {
             <h3 className="cat-card-name">{cat.name}</h3>
             <p className="cat-card-desc">{cat.description || 'Sin descripción'}</p>
             <div className="cat-card-meta">
+              {cat.parent_id && (
+                <span className="cat-parent">Destinado a: {categories.find(parent => parent.id === cat.parent_id)?.name || '—'}</span>
+              )}
               <code className="cat-slug">/{cat.slug}</code>
             </div>
             <div className="cat-card-actions">
@@ -203,6 +209,23 @@ const AdminCategories = () => {
                       onChange={e => setFormData({ ...formData, slug: e.target.value })}
                       placeholder="smartphones"
                     />
+                  </div>
+                  <div className="form-group">
+                    <label>Categoría padre / Destinado</label>
+                    <select
+                      value={formData.parent_id ?? ''}
+                      onChange={e => setFormData({
+                        ...formData,
+                        parent_id: e.target.value ? Number(e.target.value) : null,
+                      })}
+                    >
+                      <option value="">Ninguna</option>
+                      {categories
+                        .filter(c => !editingCat || c.id !== editingCat.id)
+                        .map(c => (
+                          <option key={c.id} value={c.id}>{c.name}</option>
+                        ))}
+                    </select>
                   </div>
                   <div className="form-group">
                     <label>Clase de icono (FontAwesome)</label>

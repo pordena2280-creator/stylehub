@@ -125,6 +125,7 @@ export const categorySchema = z.object({
   slug: z.string().optional(),
   description: z.string().optional(),
   icon: z.string().optional(),
+  parent_id: z.number().optional().nullable(),
   status: z.enum(['activa', 'inactiva']),
 });
 
